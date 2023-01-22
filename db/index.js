@@ -1,8 +1,8 @@
 const mongoose  = require("mongoose")
 
-const urlDB  = require('../config')
+const configdb  = require('../config')
 mongoose.set("strictQuery", false);
-mongoose.connect(urlDB,{
+mongoose.connect(configdb.urlDb,{
     useUnifiedTopology:true,
     useNewUrlParser:true,
 },err=>{

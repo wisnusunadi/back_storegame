@@ -1,5 +1,5 @@
 const dotenv = require('dotenv').config()
-
-const urlDb = process.env.MONGO_URL
-module.exports = urlDb
-
+module.exports = {
+        serviceName : process.env.SERVICE_NAME,
+        urlDb: process.env.MONGO_URL
+   };
