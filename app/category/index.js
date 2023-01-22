@@ -6,4 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-module.exports = router;
+module.exports = {
+  serviceName : process.env.SERVICE_NAME,
+  urlDb : process.env.MONGO_URL
+}
