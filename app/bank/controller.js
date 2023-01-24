@@ -12,8 +12,8 @@ module.exports={
       res.render('admin/bank/view_bank',{
         bank,
         alert,
-        name: req.session.user.name,
-        title: 'Halaman Bank'
+        // name: req.session.user.name,
+        // title: 'Halaman Bank'
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -25,8 +25,8 @@ module.exports={
   viewCreate : async(req, res)=>{
     try {
       res.render('admin/bank/create',{
-        name: req.session.user.name,
-        title: 'Halaman tambah bank'
+        // name: req.session.user.name,
+        // title: 'Halaman tambah bank'
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -37,9 +37,9 @@ module.exports={
 
   actionCreate : async(req, res)=>{
     try {
-      const { name, nameBank, noRekening } = req.body
+      const { name, bankName, noRekening } = req.body
 
-      let bank = await Bank({ name, nameBank, noRekening })
+      let bank = await Bank({ name, bankName, noRekening })
       await bank.save();
 
       req.flash('alertMessage', "Berhasil tambah bank")
@@ -62,8 +62,8 @@ module.exports={
 
       res.render('admin/bank/edit', {
         bank,
-        name: req.session.user.name,
-        title: 'Halaman ubah bank'
+        // name: req.session.user.name,
+        // title: 'Halaman ubah bank'
       })
       
     } catch (err) {
