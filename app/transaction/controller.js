@@ -1,4 +1,5 @@
 const Transaction = require('./model')
+const Player = require('../player/model')
 
 module.exports = {
   index: async (req, res) => {
@@ -22,21 +23,19 @@ module.exports = {
     }
   },
 
-  actionStatus :  async (req, res)=>{
+  actionStatus: async (req, res) => {
     try {
 
       const { id } = req.params
-      console.log("id >>")
-      console.log(id)
       const { status } = req.query
 
-      await Transaction.findByIdAndUpdate({_id : id}, { status })
+      await Transaction.findByIdAndUpdate({ _id: id }, { status })
 
       req.flash('alertMessage', `Berhasil ubah status`)
       req.flash('alertStatus', 'success')
       res.redirect('/transaction')
 
-      
+
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')

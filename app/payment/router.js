@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const { index, viewCreate, actionCreate, viewEdit, actionEdit, actionDelete, actionStatus } = require('./controller')
-
 const { isLoginAdmin } = require('../middleware/auth')
 
 router.use(isLoginAdmin)

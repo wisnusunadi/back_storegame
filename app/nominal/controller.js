@@ -1,33 +1,34 @@
 const Nominal = require('./model')
 
-module.exports={
-  index: async(req, res)=>{
+module.exports = {
+  index: async (req, res) => {
     try {
       const alertMessage = req.flash("alertMessage")
       const alertStatus = req.flash("alertStatus")
 
-      const alert = { message: alertMessage, status: alertStatus}
-       const nominal = await Nominal.find()
+      const alert = { message: alertMessage, status: alertStatus }
+      const nominal = await Nominal.find()
 
       res.render('admin/nominal/view_nominal',
-      {
-        nominal,
-        alert,
-        title: 'Halaman nominal'
-       }
+        {
+          nominal,
+          alert,
+          title: 'Nominal',
+          name: req.session.user.name,
+        }
       )
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
-      
+
     }
   },
-  viewCreate : async(req, res)=>{
+  viewCreate: async (req, res) => {
     try {
-      res.render('admin/nominal/create',{
-        // name: req.session.user.name,
-        // title: 'Halaman tambah nominal'
+      res.render('admin/nominal/create', {
+        name: req.session.user.name,
+        title: 'Tambah Nominal'
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -36,7 +37,7 @@ module.exports={
     }
   },
 
-  actionCreate : async(req, res)=>{
+  actionCreate: async (req, res) => {
     try {
       const { coinName, coinQuantity, price } = req.body
 
@@ -47,7 +48,7 @@ module.exports={
       req.flash('alertStatus', "success")
 
       res.redirect('/nominal')
-      
+
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
@@ -55,39 +56,39 @@ module.exports={
     }
   },
 
-  viewEdit : async(req, res)=>{
+  viewEdit: async (req, res) => {
     try {
       const { id } = req.params
-      
-      const nominal = await Nominal.findOne({_id : id})
+
+      const nominal = await Nominal.findOne({ _id: id })
 
       res.render('admin/nominal/edit', {
         nominal,
-        // name: req.session.user.name,
-        // title: 'Halaman ubah nominal'
+        name: req.session.user.name,
+        title: 'Ubah Nominal'
       })
-      
+
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
     }
   },
-  
-  actionEdit: async(req, res)=>{
+
+  actionEdit: async (req, res) => {
     try {
       const { id } = req.params;
-      const { coinName, coinQuantity, price } = req.body 
+      const { coinName, coinQuantity, price } = req.body
 
       await Nominal.findOneAndUpdate({
         _id: id
-      },{ coinName, coinQuantity, price });
+      }, { coinName, coinQuantity, price });
 
       req.flash('alertMessage', "Berhasil ubah nominal")
       req.flash('alertStatus', "success")
 
       res.redirect('/nominal')
-      
+
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
@@ -95,7 +96,7 @@ module.exports={
     }
   },
 
-  actionDelete: async(req, res)=>{
+  actionDelete: async (req, res) => {
     try {
       const { id } = req.params;
 
@@ -107,7 +108,7 @@ module.exports={
       req.flash('alertStatus', "success")
 
       res.redirect('/nominal')
-      
+
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')

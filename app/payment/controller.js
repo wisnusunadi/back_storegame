@@ -14,7 +14,7 @@ module.exports = {
         payment,
         alert,
         name: req.session.user.name,
-        title: 'Halaman metode pembayaran'
+        title: 'Pembayaran'
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -29,7 +29,7 @@ module.exports = {
       res.render('admin/payment/create', {
         banks,
         name: req.session.user.name,
-        title: 'Halaman tambah metode pembayaran'
+        title: 'Tambah Pembayaran'
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -68,7 +68,7 @@ module.exports = {
         payment,
         banks,
         name: req.session.user.name,
-        title: 'Halaman ubah metode pembayaran'
+        title: 'Ubah Pembayaran'
       })
 
     } catch (err) {

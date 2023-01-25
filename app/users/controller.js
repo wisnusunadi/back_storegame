@@ -8,11 +8,16 @@ module.exports = {
       const alertMessage = req.flash("alertMessage")
       const alertStatus = req.flash("alertStatus")
 
+
+      // res.render('admin/users/view_signin', {
+      //   alert,
+      //   title: 'Halaman signin'
+      // })
       const alert = { message: alertMessage, status: alertStatus }
       if (req.session.user === null || req.session.user === undefined) {
         res.render('admin/users/view_signin', {
           alert,
-          title : 'Halaman signin'
+          title: 'Halaman signin'
         })
       } else {
         res.redirect('/dashboard')
@@ -65,7 +70,7 @@ module.exports = {
       res.redirect('/')
     }
   },
-  actionLogout : (req, res)=>{
+  actionLogout: (req, res) => {
     req.session.destroy();
     res.redirect('/')
   }
